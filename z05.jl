@@ -16,8 +16,8 @@ x = range(0, 2π; length = 100)
 y = hcat(sin.(x), cos.(x))
 plot(x, y;
     label = ["sine" "cosine"],
-    xguide = "x",
-    yguide = "y",
+    xguide = "x guide",
+    yguide = "y guide",
     legend = :bottomleft,
     title = "Trigonometric functions",
     xticks = (0:0.5π:2π, ["0", "0.5π", "π", "1.5π", "2π"]),
