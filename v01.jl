@@ -63,8 +63,9 @@ Point{Float32} <: Point <: AbstractPoint
 Point{Int64} <: Point <: AbstractPoint
 subtypes(Point)
 
-
-
+Point{Float64} <: Point{Real}
+Point{Float64} <: AbstractPoint{Float64}
+Point{Float64} <: AbstractPoint{Real}
 
 coordinates(p::Point{Real}) = (p.x, p.y)
 coordinates(Point(1, 2))
@@ -82,4 +83,21 @@ coordinates(p::Point{<:Real}) = (p.x, p.y)
 coordinates(Point(1, 2))
 coordinates(Point(1.0, 2.0))
 
-Base.show(io::IO, p::AbstractPoint)
+Base.show(io::IO, p::AbstractPoint) = print(io, coordinates(p))
+Point(4, 2)
+Point(0.2, 1.3)
+Point(1, 2)
+Point{Float32}(1, 2)
+Point(1, 2.0)
+
+struct Point3D{T<:Real} <: AbstractPoint{T}
+    x::T
+    y::T
+    z::T
+end
+coordinates(p::Point3D) = (p.x, p.y, p.z)
+Point3D(1, 2, 3)
+Point3D{Float32}(1, 2, 3)
+
+Point(x::Real, y::Real) = Point(promote(x,y)...)
+Point(1,2.0)
