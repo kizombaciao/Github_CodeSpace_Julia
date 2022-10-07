@@ -58,3 +58,28 @@ struct Point{T<:Real} <: AbstractPoint{T}
     y::T
 end
 isconcretetype(Point{Float64})
+Point{Float64} <: Point <: AbstractPoint
+Point{Float32} <: Point <: AbstractPoint
+Point{Int64} <: Point <: AbstractPoint
+subtypes(Point)
+
+
+
+
+coordinates(p::Point{Real}) = (p.x, p.y)
+coordinates(Point(1, 2))
+coordinates(Point(1.0, 2.0))
+
+struct Point2{T<:Float64} <: AbstractPoint{T}
+    x::T
+    y::T
+end
+coordinates2(p::Point{Float64}) = (p.x, p.y)
+coordinates2(Point(1, 2))
+coordinates2(Point(1.0, 2.0))
+
+coordinates(p::Point{<:Real}) = (p.x, p.y)
+coordinates(Point(1, 2))
+coordinates(Point(1.0, 2.0))
+
+Base.show(io::IO, p::AbstractPoint)
